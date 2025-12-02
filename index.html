@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RBAC System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="page-header">
+    <div class="branding">
+      <div class="dot"></div>
+      <h1>RBAC System</h1>
+    </div>
+    <p class="tagline">Role-based access control in the browser with zero backend.</p>
+  </header>
+
+  <main class="content">
+    <section class="card" aria-labelledby="overview-title">
+      <div class="card-header">
+        <h2 id="overview-title">Overview</h2>
+      </div>
+      <p>
+        Use this page to model users, roles, and permissions. Everything runs locally in your browser and is saved to
+        <code>localStorage</code>, making it safe to experiment.
+      </p>
+      <ul class="summary-list" id="summary-list">
+        <li><strong>Users:</strong> <span id="summary-users">0</span></li>
+        <li><strong>Roles:</strong> <span id="summary-roles">0</span></li>
+        <li><strong>Permissions:</strong> <span id="summary-permissions">0</span></li>
+      </ul>
+      <div class="actions">
+        <button id="reset-state" type="button" class="secondary">Reset to defaults</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <section class="card" aria-labelledby="permissions-title">
+        <div class="card-header">
+          <h2 id="permissions-title">Permissions</h2>
+        </div>
+        <form id="permission-form" class="stack" autocomplete="off">
+          <label>
+            Permission name
+            <input name="permission" required placeholder="e.g., invoices.read" />
+          </label>
+          <button type="submit">Add permission</button>
+        </form>
+        <div class="list" id="permissions-list" aria-live="polite"></div>
+      </section>
+
+      <section class="card" aria-labelledby="roles-title">
+        <div class="card-header">
+          <h2 id="roles-title">Roles</h2>
+        </div>
+        <form id="role-form" class="stack" autocomplete="off">
+          <label>
+            Role name
+            <input name="role" required placeholder="e.g., manager" />
+          </label>
+          <button type="submit">Add role</button>
+        </form>
+        <form id="role-permission-form" class="stack" autocomplete="off">
+          <div class="two-col">
+            <label>
+              Role
+              <select name="role" required></select>
+            </label>
+            <label>
+              Permission
+              <select name="permission" required></select>
+            </label>
+          </div>
+          <button type="submit">Attach permission</button>
+        </form>
+        <div class="list" id="roles-list" aria-live="polite"></div>
+      </section>
+
+      <section class="card" aria-labelledby="users-title">
+        <div class="card-header">
+          <h2 id="users-title">Users</h2>
+        </div>
+        <form id="user-form" class="stack" autocomplete="off">
+          <label>
+            User name
+            <input name="user" required placeholder="e.g., Dana" />
+          </label>
+          <button type="submit">Add user</button>
+        </form>
+        <form id="user-role-form" class="stack" autocomplete="off">
+          <div class="two-col">
+            <label>
+              User
+              <select name="user" required></select>
+            </label>
+            <label>
+              Role
+              <select name="role" required></select>
+            </label>
+          </div>
+          <button type="submit">Assign role</button>
+        </form>
+        <div class="list" id="users-list" aria-live="polite"></div>
+      </section>
+
+      <section class="card" aria-labelledby="check-title">
+        <div class="card-header">
+          <h2 id="check-title">Check access</h2>
+        </div>
+        <form id="access-form" class="stack">
+          <div class="two-col">
+            <label>
+              User
+              <select name="user" required></select>
+            </label>
+            <label>
+              Permission
+              <select name="permission" required></select>
+            </label>
+          </div>
+          <button type="submit">Evaluate</button>
+        </form>
+        <div class="access-result" id="access-result" role="status" aria-live="polite"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>
+      Built for GitHub Pages. Data never leaves your browser.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
